@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/swiper.min.css">
+    <link rel="stylesheet" href="../css/bessSchool.css">
+    <title>商学院</title>
+</head>
+<body>
+    <div id="app"><template>
+        <a class="bar" :href="zhouItem.url" :style="{ background: headBg, backgroundSize: bgSize }">
+            <div class="bar-title">{{guanFang}}</div>
+            <div style="font-size: 0.36rem;color: #fff; text-align: center; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 7rem;">{{zhouItem.title}}</div>
+        </a>
+        <div class="see-room">
+            <div class="room-title">
+                鲸彩直播间
+            </div>
+            <!--<div class="pro-room">
+                <img class="pro-room-img" src="../images/zhibo.png" alt="">
+                <div class="pro-room-title">
+                    <div class="pro-room-title-left">
+                        <p>中华纹绣大讲堂</p>
+                        <p>莫方建新加坡纹绣学院西南分校</p>
+                    </div>
+                    <button class="pro-room-title-right">系列课程</button>
+                </div>
+            </div>-->
+            <div class="pro-room" v-for="item in grounds">
+                <img class="pro-room-img" :src="item.courseLogo" alt="">
+                <div class="pro-room-title">
+                    <div class="pro-room-title-left">
+                        <p>{{item.courseName}}</p>
+                        <p>{{item.productGuid}}</p>
+                    </div>
+                    <button class="pro-room-title-right">系列课程</button>
+                </div>
+            </div>
+        </div>
+        <div class="exp">
+            <div class="exp-title">
+                <div>经营心得</div>
+                <div style="margin-right: 0.3rem; font-size: 0.28rem; color: #8E8E8E;"><span>了解更多</span> <img src="../images/arrow.png" style="float: right; margin-top: 0.25rem; margin-left: 0.1rem; width: 0.3rem; height: 0.3rem;" alt=""></div>
+            </div>
+            <div class="swiper-container exp-box" style="width: 300px; margin-left: 0;">
+                <div class="swiper-wrapper exp-box-ul">
+                    <div style="font-size: 0.28rem;" class="swiper-slide exp-box-li" v-for="item in jLists">
+                        <p class="exp-li-title">{{item.title}}</p>
+                        <div class="exp-li-mid">
+                            <img class="mid-img" v-lazy="item.headImgUrl" alt="">
+                            <div class="mid-name">
+                                <p style="font-size: 0.28rem; color: #333;">{{item.memberName}}</p>
+                                <p style="margin-top: 0.12rem; font-size: 0.24rem; color: #8E8E8E;">{{item.shopName}}</p>
+                            </div>
+                        </div>
+                        <p class="exp-li-text">
+                            {{item.content}}
+                        </p>
+                    </div>
+              <!--      <div style="font-size: 0.28rem;" class="swiper-slide exp-box-li">
+                        <p class="exp-li-title">说说我为什么要开个微店</p>
+                        <div class="exp-li-mid">
+                            <img class="mid-img" src="../images/avr1.png" alt="">
+                            <div class="mid-name">
+                                <p style="font-size: 0.28rem; color: #333;">张三</p>
+                                <p style="margin-top: 0.12rem; font-size: 0.24rem; color: #8E8E8E;">张三的纹绣店</p>
+                            </div>
+                        </div>
+                        <p class="exp-li-text">
+                            这个很牛逼这个很牛逼这个很牛逼这个很牛逼这个很牛逼这个很牛逼这个很牛逼这个很牛逼这个很牛逼这个很牛逼这个很牛逼这个很牛逼这个很牛逼这个很牛逼这个很牛逼这个很牛逼这个很牛逼这个很牛逼
+                        </p>
+                    </div>
+                    <div style="font-size: 0.28rem;" class="swiper-slide exp-box-li">
+                        <p class="exp-li-title">说说我为什么要开个微店</p>
+                        <div class="exp-li-mid">
+                            <img class="mid-img" src="../images/avr1.png" alt="">
+                            <div class="mid-name">
+                                <p style="font-size: 0.28rem; color: #333;">张三</p>
+                                <p style="margin-top: 0.12rem; font-size: 0.24rem; color: #8E8E8E;">张三的纹绣店</p>
+                            </div>
+                        </div>
+                        <p class="exp-li-text">
+                            这个很牛逼这个很牛逼这个很牛逼这个很牛逼这个很牛逼这个很牛逼这个很牛逼这个很牛逼这个很牛逼这个很牛逼这个很牛逼这个很牛逼这个很牛逼这个很牛逼这个很牛逼这个很牛逼这个很牛逼这个很牛逼
+                        </p>
+                    </div>-->
+                </div>
+            </div>
+        </div>
+        <div class="sel-com">
+            <div class="com-title">
+                <div>精彩内容</div>
+                <div style="margin-right: 0.3rem; font-size: 0.28rem; color: #8E8E8E;"><span>了解更多</span> <img src="../images/arrow.png" style="float: right; margin-top: 0.25rem; margin-left: 0.1rem; width: 0.3rem; height: 0.3rem;" alt=""></div>
+            </div>
+            <div class="com-tab">
+                <div class="tab-item" v-for="(item, index) in itemLists" @click="getItem(item.articleTagGuid)">{{item.articleTagName}}</div>
+            </div>
+            <a class="com-cell" v-for="item in textlists" :href="item.url">
+                <div class="con-cell-img">
+                    <img class="con-cell-img" v-lazy="item.articleLogo" alt="">
+                </div>
+                <div class="con-cell-text">
+                    <p style="font-size: 0.28rem; color: #333;">
+                        {{item.articleTitle}}
+                    </p>
+                    <ul class="text-ul">
+                        <li class="text-li" v-for="tagItem in item.articleTags">{{tagItem.articleTagName}}</li>
+                    </ul>
+                    <p class="text-p">阅读 {{item.views}}</p>
+                </div>
+            </a>
+        </div>
+    </template></div>
+
+    <script src="../common/js/rem.js"></script>
+    <script src="../common/js/swiper.min.js"></script>
+    <script src="../common/js/jq.js"></script>
+    <script src="../common/js/vue-lazy.js"></script>
+    <script src="../common/js/vue.js"></script>
+    <script src="../common/js/axios.js"></script>
+    <script src="../common/js/qs.js"></script>
+    <script src="../common/js/config.js"></script>
+    <script src="../js/api.js"></script>
+
+    <script>
+
+        axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'
+        var ERR_OK = 0
+
+        Vue.use(VueLazyload, {
+            loading: '../images/default.jpg'
+        })
+        var app = new Vue({
+                el: '#app',
+                data: {
+                    msg: 'Hello Vue!',
+                    guanFang: '官方',
+                    zhouItem: {},
+                    headBg: '',
+                    bgSize: '',
+                    grounds: [
+//                        {
+//                                img: '../images/zhibo.png',
+//                                suTitle: '中华纹绣大讲堂1',
+//                                suText: '莫方建新加坡纹绣学院西南分校1'
+//                            }
+                            ],
+                    jLists: [
+//                        {
+//                            title: '说说我为什么要开个微店',
+//                            headImgUrl: '',
+//                            memberName: '张三',
+//                            shopName: '张三的店',
+//                            content: '这个很牛逼这个很牛逼这个很牛逼这个很牛逼这个很牛逼这个很牛逼这个很牛逼这个很牛逼这个很牛逼这个很牛逼这个很牛逼这个很牛逼这个很牛逼这个很牛逼这个很牛逼这个很牛逼这个很牛逼这个很牛逼'
+//                        }
+                        {},
+                        {},
+                        {}
+                        ],
+                    itemLists: [],
+                    itemLists2: [
+                        '热门更新',
+                        '新手入门',
+                        '引流推广',
+                        '成功案例',
+                        '成功案例',
+                        '经营分析',
+                        '经营分析',
+                        '经营分析',
+                        '店铺装修'
+                    ],
+                    textlists: []
+                },
+                created: function () {
+//                    this.getAxios()
+//                    this.hhh()
+                    this.getOneStr()
+                    this.getCourseAll()
+                    this.getOpArticlePage()
+                    this.getRecLogAll()
+                    var that =  this
+                    this.getArticleTagAll(function (articleTagGuid) {
+                        that.getItem(articleTagGuid)
+                    })
+                },
+                methods: {
+                    getItem: function(articleTagGuid) {
+                        var that = this
+                        console.log(articleTagGuid)
+                        this.getArticlePage(1, 12, articleTagGuid, function (res) {
+                            that.textlists = []
+                            var listRows = res.data.rows
+                            for (var i = 0; i < listRows.length; i++) {
+                                var item = new ArticleList(listRows[i])
+                                that.textlists.push(item)
+                            }
+                        })
+                    },
+/*                    getAxios: function () {
+                        var that = this
+                        getArticleTagAll({}, function (res) {
+                            console.log('res--bb')
+                            console.log(res)
+                            if (res.code === ERR_OK) {
+                                that.itemLists = res.data.recordList
+                            }
+                        }, function (err) {
+                            console.log('err--bb')
+                            console.log(err)
+                        })
+                    }*/
+                    /* 1.获取tag列表 */
+                    getArticleTagAll: function (successFn) {
+                        var that = this
+                        that.itemLists = []
+                        getArticleTagAll({}, function (res) {
+                            console.log('res--bb')
+                            console.log(res)
+                            if (res.code === ERR_OK) {
+                                that.itemLists = res.data.recordList
+                                successFn && successFn(res.data.recordList[0].articleTagGuid)
+                            }
+                        }, function (err) {
+                            console.log('err--bb')
+                            console.log(err)
+                        })
+                    },
+                    /* 2.获取tag对应的文章 */
+                    getArticlePage:  function (pageIndex, pageSize, articleTagGuid, successFn, errorFn) {
+                        var that = this
+                        getArticlePage({
+                            pageIndex: pageIndex,
+                            pageSize: pageSize,
+                            articleTagGuid: articleTagGuid
+                        }, function (res) {
+                            console.log('articleTagGuid-res')
+                            console.log(res)
+                            successFn && successFn(res)
+                        }, function (err) {
+                            errorFn && errorFn(err)
+                            console.log('articleTagGuid-err')
+                            console.log(err)
+                        })
+                    },
+                    /* 3. 每周话题 */
+                    getOneStr: function () {
+                        var that = this
+                        getOneStr({}, function (res) {
+                            console.log('每周话题')
+                            console.log(res)
+                            if (res.code === ERR_OK) {
+                                that.zhouItem= res.data
+                                that.headBg = 'url(' + res.data.coverLogo + ')'
+                                that.bgSize = 7 + 'rem' + ' ' + 1.6 + 'rem'
+                            }
+                        }, function (err) {
+                            console.log('每周话题-err')
+                            console.log(err)
+                        })
+                    },
+                    /* 4. 获取精彩直播推荐内容 */
+                    getCourseAll: function () {
+                        var that = this
+                        getCourseAll({
+                            type: 3,
+                            maxSize: 2
+                        }, function (res) {
+                            console.log('精彩推荐内容')
+                            console.log(res)
+                            if (res.code === ERR_OK) {
+                                that.grounds = res.data.recordList
+                            }
+                        }, function (err) {
+                            console.log('精彩推荐内容-err')
+                            console.log(err)
+                        })
+                    },
+                    /* 5. 运营笔记列表 */
+                    getOpArticlePage:  function () {
+                        var that =  this
+                        getOpArticlePage({
+                            pageIndex: 1,
+                            pageSize: 3
+                        }, function (res) {
+                            console.log('res-咨询引流列表')
+                            console.log(res)
+                        }, function (err) {
+                            console.log('err-咨询引流列表')
+                            console.log(err)
+                        })
+                    },
+                    /* 6. 运营笔记列表-新 */
+                    getRecLogAll:  function () {
+                        var that =  this
+                        getRecLogAll({
+                            articleType: 2
+                        }, function (res) {
+                            console.log('res-咨询引流列表-新')
+                            that.jLists = res.data.recordList
+                            console.log(res)
+                        }, function (err) {
+                            console.log('err-咨询引流列表-新')
+                            console.log(err)
+                        })
+                    },
+                    /* 设置图片背景 */
+                    setBackground: function () {
+//                        return { background: 'url(' + this.headBg + ')' }
+                        return {
+                            background: 'url(' + this.headBg + ')',
+                            backgroundSize: 100 + '%' + ' ' + 100 + '%'
+                        }
+                    }
+                }
+            })
+            var mySwiper = new Swiper('.swiper-container', {
+//                autoplay: 3000,//可选选项，自动滑动
+            })
+
+    </script>
+</body>
+</html>
+
